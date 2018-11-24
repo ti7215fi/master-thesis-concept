@@ -1,0 +1,20 @@
+{
+  "name": "example-project-server",
+  "version": "1.0.0",
+  "description": "Test Servers",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "create-archive": "asar pack app app.asar"
+  },
+  "author": "Tim Fischer",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compare-versions": "^3.4.0",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "asar": "^0.14.3"
+  }
+}

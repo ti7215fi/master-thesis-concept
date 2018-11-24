@@ -1,0 +1,10 @@
+{
+  "name": "demo-server",
+  "version": "3.1.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Tim Fischer",
+  "license": "ISC"
+}
