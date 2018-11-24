@@ -13,9 +13,9 @@ class HttpService {
         this.port = port;
     }
 
-    get(path, options = {}, parseAsJson = true) {
+    get(url, options = {}, parseAsJson = true) {
         return new Promise((resolve, reject) => {
-            request.get(`${this.url}/${path}`, options, (error, httpResponse, body) => {
+            request.get(url, options, (error, httpResponse, body) => {
                 if(!error) {
                     resolve({
                         httpResponse: httpResponse,
@@ -27,9 +27,9 @@ class HttpService {
         });
     }
 
-    post(path, data) {
+    post(url, data) {
         return new Promise((resolve, reject) => {
-            request.post(`${this.url}/${path}`, data, (error, httpResponse, body) => {
+            request.post(url, data, (error, httpResponse, body) => {
                 if(!error) {
                     resolve({
                         httpResponse: httpResponse,
