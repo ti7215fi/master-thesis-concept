@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "create-archive": "asar pack src app.asar"
+    "create-archive": "asar pack src %npm_package_version%.asar"
   },
   "author": "Tim Fischer",
   "license": "ISC"
