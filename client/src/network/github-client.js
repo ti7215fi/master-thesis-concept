@@ -1,6 +1,7 @@
 const HttpService = require('./http-service');
 const fileHandler = require('../core/file-handler');
 const path = require('path');
+const ipcRenderer = require('electron').ipcRenderer;
 
 class GitHubClient {
 
@@ -21,26 +22,27 @@ class GitHubClient {
     }
 
     downloadReleaseByTag(tag) {
+        let options = {
+            headers: {
+                'User-Agent': 'request module',
+            },
+        };
+
         return new Promise((resolve, reject) => {
             this.httpService.get(`${this.urlToRepo}/releases/tags/${tag}`, options).then((response) => {
                 const assets = response.body.assets;
                 if (assets && assets.length === 1 && (new RegExp(/.*\.asar/)).test(assets[0].name)) {
                     const asset = assets[0];
-                    const options = {
-                        headers: {
-                            'Accept': 'application/octet-stream',
-                            'User-Agent': 'request module',
-                        },
-                        encoding: null,
-                    }
-                    this.httpService.get(asset.url, options, false).then((response) => {
-                        const savePath = path.join(__dirname, '../../releases', asset.name);
-                        fileHandler.writeFile(savePath, response.body).then(() => {
-                            resolve();
-                        }, error => reject(error));
-                    }, error => reject(error));
+                    ipcRenderer.send('download-release', {
+                        url: asset.browser_download_url,
+                        dir: path.join(__dirname, '../../releases'),
+                        fileName: asset.name,
+                    });
+                    ipcRenderer.once('download-release-success', (event, item) => resolve());
+                    ipcRenderer.once('download-release-error', (event, error) => reject(error));
+                } else {
+                    reject('There are no assets with this tag!');
                 }
-                reject('There are no assets with this tag!');
             }, error => reject(error));
         });
     }

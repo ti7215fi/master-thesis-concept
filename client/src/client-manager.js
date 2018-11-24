@@ -9,20 +9,20 @@ class Server {
 
 class ClientManager {
 
-    /*get servers() {
+    get servers() {
         return [
             new Server(0, 'http://127.0.0.1:3000', 'Demo-Server', 'demo-server'),
             new Server(1, 'http://127.0.0.1:8080', 'Live-Server', 'live-server')
         ];
-    }*/
+    }
 
-    get servers() {
+    /*get servers() {
         const savePath = this.path.join(__dirname, '..', 'servers.json');
         if (this.fs.existsSync(savePath)) {
             return require(savePath);
         }
         return [];
-    }
+    }*/
 
     constructor() {
         this.fs = require('fs');

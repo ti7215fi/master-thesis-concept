@@ -69,3 +69,13 @@ ipcMain.on('download-client', (event, args) => {
 ipcMain.on('update-is-available', (event, args) => {
   
 });
+
+ipcMain.on('download-release', (event, args) => {
+  const options = {
+    directory: args.dir,
+    filename: args.fileName,
+  };
+  electronDl.download(BrowserWindow.getFocusedWindow(), args.url, options)
+    .then(item => event.sender.send('download-release-success', item))
+    .catch(error => event.sender.send('download-release-error', error));
+});

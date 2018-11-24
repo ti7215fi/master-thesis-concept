@@ -1,5 +1,7 @@
 'use strict';
 const path = require('path');
+const request = require('request');
+const releaseManager = require('./src/core/release-manager');
 
 class SelectServerForm {
 
@@ -36,11 +38,19 @@ class SelectServerForm {
         }, (error) => console.error(error));
     }*/
 
-    submit() {
+    /*submit() {
         const id = this.selectBox.options[this.selectBox.selectedIndex].value;
         const client = this.serverManager.getClientById(+id);
         this.stateHandler.serverId = +id;
         this.clientLoader.loadClient(client);
+    }*/
+
+    submit() {
+        const id = this.selectBox.options[this.selectBox.selectedIndex].value;
+        const client = this.serverManager.getClientById(+id);
+        request.get(`${client.url}/client-app/version`, (error, httpResponse, releaseVersion) => {
+            releaseManager.loadRelease(releaseVersion);
+        }, error => console.error(error));
     }
 
     handleFileSelect(event) {

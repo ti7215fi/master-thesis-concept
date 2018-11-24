@@ -18,9 +18,7 @@ function getPackageJson() {
 
 server.get('/client-app/version', (req, res) => {
     try {
-        const packageJson = getPackageJson();
-        // get value from version key
-        const appVersion = packageJson.version;
+        const appVersion = require('./app.json').version;
         // send version number as response
         res.status(200).send(appVersion);
     } catch (error) {

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const asar = require('asar');
 
 class FileHandler {
 
@@ -10,6 +11,17 @@ class FileHandler {
                 }
                 resolve();
             });
+        });
+    }
+
+    extractFileFromAsarArchive(path, fileName) {
+        return new Promise((resolve, reject) => {
+            try {
+                const buffer = asar.extractFile(path, fileName);
+                resolve(buffer);
+            } catch(error) {
+                reject(error);
+            }
         });
     }
 
