@@ -4,8 +4,7 @@
   "description": "Test Servers",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "create-archive": "asar pack app app.asar"
+    "start": "node index.js"
   },
   "author": "Tim Fischer",
   "license": "ISC",
