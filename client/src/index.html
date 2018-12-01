@@ -7,6 +7,12 @@
     <h1>Beispielprojekt</h1>
     Version <script>document.write(process.env.npm_package_version)</script>
 
+    <form name="addUserForm" onsubmit="add()">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="addUserForm.fieldName">
+      <br><br>
+      <button type="submit">Hinzufügen</button>
+    </form> 
   </body>
   <script type="text/javascript" src="./index.js"></script>
 </html>
